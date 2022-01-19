@@ -6,6 +6,7 @@
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
+	ResultSet rs2 = null;
 	
 	String sql = "";
 	request.setCharacterEncoding("UTF-8");
@@ -27,6 +28,7 @@
 		}
 		pstmt = conn.prepareStatement(sql);
 		rs = pstmt.executeQuery(sql);
+
 
 		
 	}catch (Exception e){
@@ -60,10 +62,27 @@
 		String b_hit = rs.getString("b_hit");
 		String b_regdate = rs.getString("b_regdate").substring(0,10);
 		String b_like = rs.getString("b_like");
+
 %>	
 	<tr>
 	<td><%=b_idx%></td>
-	<td><a href="view.jsp?b_idx=<%=b_idx%>"><%=b_title%></td>
+	<td><a href="view.jsp?b_idx=<%=b_idx%>"><%=b_title%>
+<%
+	int re_cnt = 0;
+	sql = "select count(r_idx) from tb_reply where r_boardidx=?";
+	pstmt = conn.prepareStatement(sql);
+	pstmt.setString(1, b_idx);
+	rs2 = pstmt.executeQuery();
+		if(rs2.next()){
+			re_cnt = rs2.getInt(1);
+		}
+	if(re_cnt>0){
+%>
+	(<%=re_cnt%>)
+<%
+	}
+%>
+	</td>
 	<td><%=b_userid%></td>
 	<td><%=b_hit%></td>
 	<td><%=b_regdate%></td>
