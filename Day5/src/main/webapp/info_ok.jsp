@@ -24,14 +24,14 @@
 		if(dao.edit(member) > 0){
 %>
 	<script>
-		alert('정보정보가 수정되었습니다.');
+		alert('개인정보 수정 완료.');
 		location.href='./info.jsp';
 	</script>
 <%
 		}else{
 %>
 	<script>
-		alert('정보정보 수정이 실패했습니다.');
+		alert('개인정보 수정 실패.');
 		history.back();
 	</script>
 <%
