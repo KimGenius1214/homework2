@@ -1,0 +1,134 @@
+EL 표현식(Expression Language)
+- 자바빈의 프로퍼티, 값, 액션태그 등을 쉽고 간결하게 사용할 수 있도록 하는 기술
+
+${} : JSP가 실행될 때 즉시 반영되는 구간(객체의 프로퍼티 값을 get)
+#{} : 시스템에서 필요하다고 판단될 때 값을 사용(객체의 프로퍼티 값을 set)
+
+산술 연산자
+${10 + 2}
+${10 - 2}
+${10 * 2}
+${10 div 2} // 나누기
+${10 mod 2} // 나머지
+
+비교 연산자
+${10 eq 2}	// 같다
+${10 ne 2}  // 다르다
+${10 gt 2}	// 크다
+${10 lt 2}	// 작다
+${10 ge 2}	// 크거나 같다
+${10 le 2}	// 작거나 같다
+
+논리 연산자
+${true and true}
+${true or true}
+${not true}
+
+삼항 연산자
+${ 20 > 10 ? "크다" : "작다"}
+
+empty 연산자
+${ empty 변수 }
+- 값이 null이면 true
+- 문자열, 배열, Map, Collection 객체의 크기가 0이면 true
+- 그외에는 false
+
+변수
+pageScope(pageContext) : 현재 페이지
+requestScope(request) : 전달 받은 값을 저장하는 변수
+sessionScope(session) : 서버(메모리)에 저장하는 변수, 개인의 정보
+applicationScope(application) : 전역 변수
+
+JSTL(Java Sever Page Standard Tag Library)
+- JSP개발을 단순화하기 위한 태그 라이브러리 
+- 스크립틀릿 태그를 사용할 필요가 없음
+- 빠른 개발이 가능
+- 코드를 재사용할 수 있음
+- http://tomcat.apache.org/taglibs/standard/
+
+JSTL의 종류
+1. core tags
+- 변수 생성, URL관리, 프로그램의 흐름을 제어
+- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+선언하고 사용
+
+	c:out
+	jsp에서 <%= %> 태그와 유사한 표현식의 결과를 표시
+	<c:out value="${변수}"/>
+	
+	c:import
+	상대 또는 절대 URL을 검색하여 내용을 var 문자열, varReader의 Reader 또는 페이지에 표시
+	
+	c:set
+	- 계산 결과를 scope 변수에 설정
+	
+	c:remove
+	특정 범위에서 지정된 범위 변수를 제거할 대 사용
+	
+	c:if
+	조건을 테스트하는데 사용되는 조건부 태그이며, 표현식이 참인 경우에만 내용을 표시
+	
+	c:forEach
+	기본 반복 태그이며 고정된 횟수 또는 초과되는 중첩된 본문 내용을 반복
+	
+	c:redirect 
+	브라우저를 새 URL로 리디렉션
+
+
+2. formatting
+- 메시지 형식화, 번호 및 날짜 ,통화 형식화 등을 지원
+- <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+	fmt:parseNumber
+	통화, 백분율 또는 숫자의 문자열 표현을 분석하는데 사용
+	
+	fmt:formatNumber
+	특정 형식 도는 정밀도로 숫자값을 형식화 하는데 사용
+	
+	fmt:parseDate
+	시간과 날짜의 문자열 표현을 분석하는데 사용
+	
+	fmt:formatDate
+	제공된 패턴 및 스타일을 사용하여 시간 및 날짜를 형식화
+	
+	fmt:setTimeZone
+	시간대 구성 변수 내에 시간을 저장
+	
+3. function
+- 문자열 조작 및 문자열 길이를 지원
+- <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+	fn:contains()
+	지정된 하위 문자열을 포함하는 입력 문자열을 테스트하는데 사용
+	
+	fn:indxeOf()
+	지정된 하위 문자열이 처음 나타나는 문자열 내에서 인덱스를 반환
+	
+	fn:split()
+	문자열을 하위 문자열 배열로 분할
+	
+	fn:endswith()
+	입력 문자열이 지정된 접미어로 끝나는지 테스트
+	
+	fn:tirm()
+	문자열의 양쪽 끝 공백을 제거
+	
+	fn:toLowerCase()
+	문자열의 모든 문자를 소문자로 변환
+	
+	fn:toUpperCase()
+	문자열의 모든 문자를 대문자로 변환
+	
+	fn:substring()
+	주어진 문자열 시작 및 끝 위치에 따라 문자열의 일부를 반환
+	
+	fn:length()
+	문자열 내부의 문자 수 또는 컬렉션의 항목수를 반환
+	
+	fn:replace()
+	모든 문자열을 다른 문자열 시퀀스로 변환
+
+
+과제
+게시판의 list페이지를 el, jstl으로 재구현
+
